@@ -1,0 +1,6 @@
+#!/bin/bash
+
+bundle install --with test
+bundle exec reek
+bundle exec rubocop --parallel --extra-details --display-style-guide
+bundle exec rspec
