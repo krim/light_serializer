@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport', '~> 4.0'
   spec.add_dependency 'dry-struct', '~> 0.5'
   spec.add_dependency 'dry-types', '~> 0.13.2'
+  spec.add_dependency 'oj', '~> 3'
   spec.add_development_dependency 'bundler', '~> 1.0'
   spec.add_development_dependency 'factory_bot', '~> 4.11'
   spec.add_development_dependency 'pry-byebug', '~> 3.0'
