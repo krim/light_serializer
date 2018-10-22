@@ -6,7 +6,7 @@ require 'light_serializer/serialization'
 RSpec.describe LightSerializer::Serialization do
   include_context 'with base and nested serializers'
 
-  subject(:serialized_object) { BaseSerializer.new(object) }
+  subject(:serialized_object) { ChildSerializer.new(object) }
 
   let(:object_attributes) do
     {

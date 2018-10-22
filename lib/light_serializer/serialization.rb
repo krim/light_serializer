@@ -11,14 +11,21 @@ module LightSerializer
     include ::Dry::Types.module
   end
 
+  # :reek:ModuleInitialize
   module Serialization
     extend ActiveSupport::Concern
 
     class_methods do
+      # :reek:Attribute
       attr_accessor :attributes_to_serialize
 
       def attributes(**attrs)
-        self.attributes_to_serialize = attrs
+        self.attributes_to_serialize = attributes_to_serialize ? attributes_to_serialize.merge(attrs) : attrs
+      end
+
+      def inherited(subclass)
+        super(subclass)
+        subclass.attributes_to_serialize = attributes_to_serialize.dup if attributes_to_serialize.present?
       end
     end
 
