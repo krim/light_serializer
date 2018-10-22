@@ -36,7 +36,17 @@ RSpec.describe LightSerializer::Serialization do
 
   let(:expected_hash) { object_attributes.merge(nested_resource: nested_object_attributes) }
 
-  it 'returns correct hash' do
-    expect(serialized_object.to_hash).to eq(expected_hash)
+  describe '#to_hash' do
+    it 'returns correct hash' do
+      expect(serialized_object.to_hash).to eq(expected_hash)
+    end
+  end
+
+  describe '#to_json' do
+    let(:expected_json) { Oj.dump(expected_hash, mode: :compat) }
+
+    it 'returns correct json' do
+      expect(serialized_object.to_json).to eq(expected_json)
+    end
   end
 end

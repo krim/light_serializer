@@ -57,11 +57,15 @@ module LightSerializer
     end
 
     def nested_object_attributes
-      self.class.attributes_to_serialize.reject { |_key, type| type.class.name.start_with?('Dry::Types::') }
+      self.class.attributes_to_serialize.reject { |_key, type| dry_klass?(type) }
     end
 
     def klass_attributes
-      self.class.attributes_to_serialize.select { |_key, type| type.class.name.start_with?('Dry::Types::') }
+      self.class.attributes_to_serialize.select { |_key, type| dry_klass?(type) }
+    end
+
+    def dry_klass?(type)
+      type.class.name.start_with?('Dry::Types::')
     end
 
     def structed_object
