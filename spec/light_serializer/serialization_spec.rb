@@ -31,10 +31,16 @@ RSpec.describe LightSerializer::Serialization do
   let(:object) do
     result = OpenStruct.new(object_attributes)
     result.nested_resource = OpenStruct.new(object_attributes)
+    result.nested_resources = [OpenStruct.new(object_attributes)]
     result
   end
 
-  let(:expected_hash) { object_attributes.merge(nested_resource: nested_object_attributes) }
+  let(:expected_hash) do
+    object_attributes.merge(
+      nested_resource: nested_object_attributes,
+      nested_resources: [nested_object_attributes]
+    )
+  end
 
   describe '#to_hash' do
     it 'returns correct hash' do

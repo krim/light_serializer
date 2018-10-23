@@ -5,7 +5,7 @@ RSpec.shared_context 'with base and nested serializers' do
     include ::LightSerializer::Serialization
 
     attributes(
-      id: LightSerializer::Types::Integer
+      id: LightSerializer::Types::Strict::Integer
     )
   end
 
@@ -13,20 +13,21 @@ RSpec.shared_context 'with base and nested serializers' do
     include ::LightSerializer::Serialization
 
     attributes(
-      id: LightSerializer::Types::Integer,
-      name: LightSerializer::Types::String
+      id: LightSerializer::Types::Strict::Integer,
+      name: LightSerializer::Types::Strict::String
     )
   end
 
   class ChildSerializer < BaseSerializer
     attributes(
-      name: LightSerializer::Types::String,
-      nicknames: LightSerializer::Types::Array.of(LightSerializer::Types::String),
-      active: LightSerializer::Types::Bool,
-      options: LightSerializer::Types::Hash,
-      rating: LightSerializer::Types::Float,
-      created_at: LightSerializer::Types::Time,
-      nested_resource: ::NestedSerializer
+      name: LightSerializer::Types::Strict::String,
+      nicknames: LightSerializer::Types::Strict::Array.of(LightSerializer::Types::Strict::String),
+      active: LightSerializer::Types::Strict::Bool,
+      options: LightSerializer::Types::Strict::Hash,
+      rating: LightSerializer::Types::Strict::Float,
+      created_at: LightSerializer::Types::Strict::Time,
+      nested_resource: ::NestedSerializer,
+      nested_resources: ::NestedSerializer
     )
   end
 end

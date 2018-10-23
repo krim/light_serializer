@@ -84,8 +84,22 @@ module LightSerializer
 
     def nested_attributes
       nested_object_attributes.each_with_object({}) do |(name, klass), result|
-        result[name] = klass.new(object.public_send(name)).to_hash
+        result[name] = attributes_by_type(name, klass)
       end
+    end
+
+    def attributes_by_type(name, klass)
+      object_attribute = object.public_send(name)
+
+      if object_attribute.is_a?(Array)
+        object_attribute.map { |object| object_to_hash(object, klass) }
+      else
+        object_to_hash(object, klass)
+      end
+    end
+
+    def object_to_hash(object, klass)
+      klass.new(object).to_hash
     end
   end
 end
