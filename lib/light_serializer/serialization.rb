@@ -9,6 +9,18 @@ require 'active_support/core_ext/module/delegation'
 module LightSerializer
   module Types
     include ::Dry::Types.module
+
+    class NestedObject
+      def self.serialize_by(serializer)
+        Types::Hash.schema(serializer.attributes)
+      end
+    end
+
+    class NestedObjects
+      def self.each_serialize_by(serializer)
+        Types.Array(Types::Hash.schema(serializer.attributes))
+      end
+    end
   end
 
   # :reek:ModuleInitialize
@@ -50,56 +62,30 @@ module LightSerializer
       klass_attributes.each do |key, type|
         serialization_klass.attribute(key, type)
       end
-
-      nested_object_attributes.each do |key, _type|
-        serialization_klass.attribute(key, Types::Hash | Types::Array)
-      end
-    end
-
-    def nested_object_attributes
-      self.class.attributes_to_serialize.reject { |_key, type| dry_klass?(type) }
     end
 
     def klass_attributes
-      self.class.attributes_to_serialize.select { |_key, type| dry_klass?(type) }
-    end
-
-    def dry_klass?(type)
-      type.class.name.start_with?('Dry::Types::')
+      self.class.attributes_to_serialize
     end
 
     def structed_object
-      serialization_klass.new(object_attributes)
+      serialization_klass.new(object_attributes(object))
     end
 
-    def object_attributes
-      current_attributes.merge(nested_attributes)
-    end
-
-    def current_attributes
-      klass_attributes.each_with_object({}) do |(name, _klass), result|
-        result[name] = object.public_send(name)
-      end
-    end
-
-    def nested_attributes
-      nested_object_attributes.each_with_object({}) do |(name, klass), result|
-        result[name] = attributes_by_type(name, klass)
-      end
-    end
-
-    def attributes_by_type(name, klass)
-      object_attribute = object.public_send(name)
-
-      if object_attribute.is_a?(Array)
-        object_attribute.map { |object| object_to_hash(object, klass) }
+    def object_attributes(object)
+      if object.respond_to?(:to_h)
+        object.to_h.transform_values do |value|
+          if value.is_a?(Array)
+            value.map { |entity| object_attributes(entity) }
+          elsif value.respond_to?(:to_h)
+            object_attributes(value.to_h)
+          else
+            value
+          end
+        end
       else
-        object_to_hash(object, klass)
+        object
       end
-    end
-
-    def object_to_hash(object, klass)
-      klass.new(object).to_hash
     end
   end
 end
