@@ -26,8 +26,8 @@ RSpec.shared_context 'with base and nested serializers' do
       options: LightSerializer::Types::Strict::Hash,
       rating: LightSerializer::Types::Strict::Float,
       created_at: LightSerializer::Types::Strict::Time,
-      nested_resource: ::NestedSerializer,
-      nested_resources: ::NestedSerializer
+      nested_resource: LightSerializer::Types::NestedObject.serialize_by(NestedSerializer),
+      nested_resources: LightSerializer::Types::NestedObjects.each_serialize_by(::NestedSerializer)
     )
   end
 end
