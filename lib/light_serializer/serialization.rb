@@ -5,6 +5,7 @@ require 'dry-types'
 require 'dry-struct'
 require 'active_support/concern'
 require 'active_support/core_ext/module/delegation'
+require_relative 'attributes'
 
 module LightSerializer
   module Types
@@ -69,23 +70,7 @@ module LightSerializer
     end
 
     def structed_object
-      serialization_klass.new(object_attributes(object))
-    end
-
-    def object_attributes(object)
-      if object.respond_to?(:to_h)
-        object.to_h.transform_values do |value|
-          if value.is_a?(Array)
-            value.map { |entity| object_attributes(entity) }
-          elsif value.respond_to?(:to_h)
-            object_attributes(value.to_h)
-          else
-            value
-          end
-        end
-      else
-        object
-      end
+      serialization_klass.new(Attributes.prepare(object))
     end
   end
 end
