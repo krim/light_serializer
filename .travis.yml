@@ -1,7 +1,7 @@
 language: ruby
-  rvm:
-    - 2.4
-    - 2.5.1
-    - ruby-head
-  script:
-    - ./bin/test
+rvm:
+  - 2.4
+  - 2.5.1
+  - ruby-head
+script:
+  - ./bin/test
