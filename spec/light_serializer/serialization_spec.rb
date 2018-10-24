@@ -30,8 +30,8 @@ RSpec.describe LightSerializer::Serialization do
   end
   let(:object) do
     result = OpenStruct.new(object_attributes)
-    result.nested_resource = OpenStruct.new(object_attributes)
-    result.nested_resources = [OpenStruct.new(object_attributes)]
+    result.nested_resource = OpenStruct.new(nested_object_attributes)
+    result.nested_resources = [OpenStruct.new(nested_object_attributes)]
     result
   end
 
@@ -53,6 +53,32 @@ RSpec.describe LightSerializer::Serialization do
 
     it 'returns correct json' do
       expect(serialized_object.to_json).to eq(expected_json)
+    end
+  end
+
+  context 'when object attributes are not valid' do
+    let(:object_attributes) do
+      {
+        id: 'string',
+        name: 123
+      }
+    end
+
+    it 'raise an error' do
+      expect { serialized_object.to_hash }.to raise_error(Dry::Struct::Error)
+    end
+  end
+
+  context 'when nested object attributes are not valid' do
+    let(:nested_object_attributes) do
+      {
+        id: 'string',
+        name: 123
+      }
+    end
+
+    it 'raise an error' do
+      expect { serialized_object.to_hash }.to raise_error(Dry::Struct::Error)
     end
   end
 end
