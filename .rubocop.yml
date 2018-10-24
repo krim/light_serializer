@@ -5,6 +5,7 @@ AllCops:
   TargetRubyVersion: 2.3
   Exclude:
     - 'bin/*'
+    - 'vendor/*'
 
 Style/Documentation:
   Enabled: false
