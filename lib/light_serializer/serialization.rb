@@ -70,7 +70,7 @@ module LightSerializer
     end
 
     def structed_object
-      serialization_klass.new(Attributes.prepare(object))
+      serialization_klass.new(Attributes.prepare(serialization_klass, object))
     end
   end
 end

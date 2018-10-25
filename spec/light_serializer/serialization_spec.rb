@@ -34,13 +34,14 @@ RSpec.describe LightSerializer::Serialization do
     result.nested_resources = [OpenStruct.new(nested_object_attributes)]
     result
   end
-
-  let(:expected_hash) do
+  let(:result) do
     object_attributes.merge(
       nested_resource: nested_object_attributes,
       nested_resources: [nested_object_attributes]
     )
   end
+
+  let(:expected_hash) { result.merge(custom_attribute: 'overwrote string') }
 
   describe '#to_hash' do
     it 'returns correct hash' do
@@ -49,10 +50,13 @@ RSpec.describe LightSerializer::Serialization do
   end
 
   describe '#to_json' do
-    let(:expected_json) { Oj.dump(expected_hash, mode: :compat) }
+    subject(:hash_result) do
+      Oj.load(serialized_object.to_json, mode: :compat, symbol_keys: true)
+    end
 
     it 'returns correct json' do
-      expect(serialized_object.to_json).to eq(expected_json)
+      expected_hash[:created_at] = expected_hash[:created_at].to_s
+      expect(hash_result).to eq(expected_hash)
     end
   end
 
