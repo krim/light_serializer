@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'light_serializer/serializer'
+require 'light_serializer/serialization'
 
-RSpec.describe LightSerializer::Serializer do
+RSpec.describe LightSerializer::Serialization do
   include_context 'with base and nested serializers'
 
   subject(:serialized_object) { ChildSerializer.new(object) }
@@ -11,7 +11,7 @@ RSpec.describe LightSerializer::Serializer do
     {
       id: 123,
       name: 'Foo',
-      nicknames: %w[Bar Code],
+      nicknames: %w[Bar Baz],
       active: true,
       options: {
         color: 'red',
