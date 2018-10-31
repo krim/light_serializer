@@ -5,8 +5,18 @@ RSpec.shared_context 'with base and nested serializers' do
     include ::LightSerializer::Serialization
 
     attributes(
-      id: LightSerializer::Types::Strict::Integer,
-      name: LightSerializer::Types::Strict::String
+      :id,
+      :name
+    )
+  end
+
+  class TinyWithNestedAttributeSerializer
+    include ::LightSerializer::Serialization
+
+    attributes(
+      :id,
+      :name,
+      nested_attribute: TinySeriaizer
     )
   end
 
@@ -14,8 +24,8 @@ RSpec.shared_context 'with base and nested serializers' do
     include ::LightSerializer::Serialization
 
     attributes(
-      id: LightSerializer::Types::Strict::Integer,
-      custom_attribute: LightSerializer::Types::Strict::String
+      :id,
+      :custom_attribute
     )
 
     def custom_attribute
@@ -27,9 +37,9 @@ RSpec.shared_context 'with base and nested serializers' do
     include ::LightSerializer::Serialization
 
     attributes(
-      id: LightSerializer::Types::Strict::Integer,
-      name: LightSerializer::Types::Strict::String,
-      another_custom_attribute: LightSerializer::Types::Strict::String
+      :id,
+      :name,
+      :another_custom_attribute
     )
 
     def another_custom_attribute
@@ -39,15 +49,15 @@ RSpec.shared_context 'with base and nested serializers' do
 
   class ChildSerializer < BaseSerializer
     attributes(
-      name: LightSerializer::Types::Strict::String,
-      nicknames: LightSerializer::Types::Strict::Array.of(LightSerializer::Types::Strict::String),
-      active: LightSerializer::Types::Strict::Bool,
-      options: LightSerializer::Types::Strict::Hash,
-      rating: LightSerializer::Types::Strict::Float,
-      created_at: LightSerializer::Types::Strict::Time,
-      nested_resource: NestedSerializer,
-      nested_resources: LightSerializer::Types::Array.of(NestedSerializer),
-      custom_attribute: LightSerializer::Types::Strict::String
+      :name,
+      :nicknames,
+      :active,
+      :options,
+      :rating,
+      :created_at,
+      { nested_resource: NestedSerializer },
+      { nested_resources: NestedSerializer },
+      :custom_attribute
     )
 
     def custom_attribute

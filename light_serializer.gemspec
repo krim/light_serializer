@@ -20,8 +20,6 @@ Gem::Specification.new do |spec|
   end
 
   spec.required_ruby_version = '>= 2.3'
-  spec.add_dependency 'dry-struct', '~> 0.5'
-  spec.add_dependency 'dry-types', '~> 0.13.2'
   spec.add_dependency 'oj', '~> 3'
   spec.add_development_dependency 'bundler', '~> 1.0'
   spec.add_development_dependency 'factory_bot', '~> 4.11'

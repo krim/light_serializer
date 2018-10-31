@@ -1,16 +1,9 @@
 # frozen_string_literal: true
 
 require 'oj'
-require 'dry-types'
-require 'dry-struct'
-require_relative 'validator'
 require_relative 'hashed_object'
 
 module LightSerializer
-  module Types
-    include Dry::Types.module
-  end
-
   module Serialization
     attr_reader :object
 
@@ -19,18 +12,10 @@ module LightSerializer
     end
 
     module ClassAttributes
-      def attributes(attributes_with_types = {})
-        return @attributes if attributes_with_types.empty?
+      def attributes(*attributes)
+        return @attributes if attributes.empty?
 
-        @attributes = @attributes ? @attributes.merge(attributes_with_types) : attributes_with_types
-      end
-
-      def light_serializer?
-        true
-      end
-
-      def validator
-        Validator.get(attributes)
+        @attributes = @attributes ? (@attributes + attributes).flatten : attributes
       end
 
       def inherited(subclass)
@@ -44,21 +29,17 @@ module LightSerializer
     end
 
     def to_json
-      Oj.dump(to_hash, mode: :compat)
+      Oj.dump(hashed_object, mode: :compat)
     end
 
     def to_hash
-      validated_object.to_hash
+      hashed_object
     end
 
     private
 
-    def validated_object
-      self.class.validator.new(hashed_object)
-    end
-
     def hashed_object
-      HashedObject.get(object, self)
+      object.is_a?(Enumerable) ? object.map { |entity| HashedObject.get(entity, self) } : HashedObject.get(object, self)
     end
   end
 end
