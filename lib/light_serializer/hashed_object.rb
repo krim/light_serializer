@@ -2,14 +2,14 @@
 
 module LightSerializer
   class HashedObject
-    attr_reader :object, :serializer
+    attr_reader :raw_object, :serializer
 
     def self.get(*args)
       new(*args).get
     end
 
-    def initialize(object, serializer)
-      @object = object
+    def initialize(raw_object, serializer)
+      @raw_object = raw_object
       @serializer = serializer
     end
 
@@ -21,7 +21,7 @@ module LightSerializer
 
     def transform_to_hash
       serializer.class.attributes.each_with_object({}) do |attribute, result|
-        obtain_values(attribute, object, result)
+        obtain_values(attribute, raw_object, result)
       end
     end
 
