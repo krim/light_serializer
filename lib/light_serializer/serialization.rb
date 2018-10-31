@@ -15,11 +15,11 @@ module LightSerializer
       def attributes(*attributes)
         return @attributes if attributes.empty?
 
-        @attributes = @attributes ? (@attributes + attributes).flatten : attributes
+        @attributes = @attributes ? @attributes + attributes : attributes
       end
 
       def inherited(subclass)
-        subclass.attributes(attributes)
+        subclass.attributes(*attributes)
         super(subclass)
       end
     end
