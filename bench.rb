@@ -10,7 +10,7 @@ require 'pry'
 
 ActiveRecord::Base.establish_connection(
   adapter:  'sqlite3',
-  database: ':memory:',
+  database: ':memory:'
 )
 
 ActiveRecord::Migration.verbose = false
@@ -45,9 +45,7 @@ class User < ActiveRecord::Base
   json_schema { { name: String, email: String } }
 end
 
-class UserLightSerializer
-  include LightSerializer::Serialization
-
+class UserLightSerializer < LightSerializer::Serializer
   attributes(:name, :email)
 end
 
@@ -69,15 +67,11 @@ end
 
 ### Associations ###
 
-class BookLightSerializer
-  include LightSerializer::Serialization
-
+class BookLightSerializer < LightSerializer::Serializer
   attributes(:title, :year)
 end
 
-class AuthorLightSerializer
-  include LightSerializer::Serialization
-
+class AuthorLightSerializer < LightSerializer::Serializer
   attributes(
     :name,
     :last_name,

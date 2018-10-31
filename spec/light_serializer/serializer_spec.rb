@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require 'ostruct'
-require 'light_serializer/serialization'
+require 'light_serializer/serializer'
 
-RSpec.describe LightSerializer::Serialization do
+RSpec.describe LightSerializer::Serializer do
   include_context 'with base and nested serializers'
 
   subject(:serialized_object) { ChildSerializer.new(object) }

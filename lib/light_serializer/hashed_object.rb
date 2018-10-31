@@ -14,14 +14,18 @@ module LightSerializer
     end
 
     def get
-      transform_to_hash
+      if raw_object.is_a?(Enumerable)
+        raw_object.map { |entity| transform_to_hash(entity) }
+      else
+        transform_to_hash(raw_object)
+      end
     end
 
     private
 
-    def transform_to_hash
+    def transform_to_hash(object)
       serializer.class.attributes.each_with_object({}) do |attribute, result|
-        obtain_values(attribute, raw_object, result)
+        obtain_values(attribute, object, result)
       end
     end
 
