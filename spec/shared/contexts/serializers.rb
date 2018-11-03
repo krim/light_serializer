@@ -1,12 +1,25 @@
 # frozen_string_literal: true
 
 RSpec.shared_context 'with base and nested serializers' do
-  class BaseSerializer
-    include ::LightSerializer::Serialization
-
+  class TinySeriaizer < ::LightSerializer::Serializer
     attributes(
-      id: LightSerializer::Types::Strict::Integer,
-      custom_attribute: LightSerializer::Types::Strict::String
+      :id,
+      :name
+    )
+  end
+
+  class TinyWithNestedAttributeSerializer < ::LightSerializer::Serializer
+    attributes(
+      :id,
+      :name,
+      nested_attribute: TinySeriaizer
+    )
+  end
+
+  class BaseSerializer < ::LightSerializer::Serializer
+    attributes(
+      :id,
+      :custom_attribute
     )
 
     def custom_attribute
@@ -14,13 +27,11 @@ RSpec.shared_context 'with base and nested serializers' do
     end
   end
 
-  class NestedSerializer
-    include ::LightSerializer::Serialization
-
+  class NestedSerializer < ::LightSerializer::Serializer
     attributes(
-      id: LightSerializer::Types::Strict::Integer,
-      name: LightSerializer::Types::Strict::String,
-      another_custom_attribute: LightSerializer::Types::Strict::String
+      :id,
+      :name,
+      :another_custom_attribute
     )
 
     def another_custom_attribute
@@ -30,15 +41,15 @@ RSpec.shared_context 'with base and nested serializers' do
 
   class ChildSerializer < BaseSerializer
     attributes(
-      name: LightSerializer::Types::Strict::String,
-      nicknames: LightSerializer::Types::Strict::Array.of(LightSerializer::Types::Strict::String),
-      active: LightSerializer::Types::Strict::Bool,
-      options: LightSerializer::Types::Strict::Hash,
-      rating: LightSerializer::Types::Strict::Float,
-      created_at: LightSerializer::Types::Strict::Time,
-      nested_resource: LightSerializer::Types::NestedObject.serialize_by(NestedSerializer),
-      nested_resources: LightSerializer::Types::NestedObjects.each_serialize_by(::NestedSerializer),
-      custom_attribute: LightSerializer::Types::Strict::String
+      :name,
+      :nicknames,
+      :active,
+      :options,
+      :rating,
+      :created_at,
+      { nested_resource: NestedSerializer },
+      { nested_resources: NestedSerializer },
+      :custom_attribute
     )
 
     def custom_attribute

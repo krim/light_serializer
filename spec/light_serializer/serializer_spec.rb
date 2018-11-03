@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require 'ostruct'
-require 'light_serializer/serialization'
+require 'light_serializer/serializer'
 
-RSpec.describe LightSerializer::Serialization do
+RSpec.describe LightSerializer::Serializer do
   include_context 'with base and nested serializers'
 
   subject(:serialized_object) { ChildSerializer.new(object) }
@@ -36,8 +36,8 @@ RSpec.describe LightSerializer::Serialization do
   end
   let(:result) do
     object_attributes.merge(
-      nested_resource: nested_object_attributes,
-      nested_resources: [nested_object_attributes]
+      nested_resource: nested_object_attributes.merge(another_custom_attribute: 'just string'),
+      nested_resources: [nested_object_attributes.merge(another_custom_attribute: 'just string')]
     )
   end
 
@@ -57,32 +57,6 @@ RSpec.describe LightSerializer::Serialization do
     it 'returns correct json' do
       expected_hash[:created_at] = expected_hash[:created_at].to_s
       expect(hash_result).to eq(expected_hash)
-    end
-  end
-
-  context 'when object attributes are not valid' do
-    let(:object_attributes) do
-      {
-        id: 'string',
-        name: 123
-      }
-    end
-
-    it 'raise an error' do
-      expect { serialized_object.to_hash }.to raise_error(Dry::Struct::Error)
-    end
-  end
-
-  context 'when nested object attributes are not valid' do
-    let(:nested_object_attributes) do
-      {
-        id: 'string',
-        name: 123
-      }
-    end
-
-    it 'raise an error' do
-      expect { serialized_object.to_hash }.to raise_error(Dry::Struct::Error)
     end
   end
 end
