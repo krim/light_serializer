@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'oj'
-require './lib/light_serializer/hashed_object'
+require 'light_serializer/hashed_object'
 
 module LightSerializer
   class Serializer
