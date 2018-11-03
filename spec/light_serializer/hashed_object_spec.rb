@@ -49,5 +49,14 @@ RSpec.describe LightSerializer::HashedObject do
         expect(hashed_object).to eq(expected_hash)
       end
     end
+
+    context 'when serializer has a custom name for root' do
+      let(:serializer) { TinyWithNestedAttributeSerializer.new(object, root: :tiny_object) }
+      let(:expected_hash) { { tiny_object: { id: 1, name: 'test', nested_attribute: { id: 2, name: 'nested' } } } }
+
+      it 'gets correct hash for it' do
+        expect(hashed_object).to eq(expected_hash)
+      end
+    end
   end
 end

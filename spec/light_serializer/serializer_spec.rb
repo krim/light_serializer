@@ -58,5 +58,16 @@ RSpec.describe LightSerializer::Serializer do
       expected_hash[:created_at] = expected_hash[:created_at].to_s
       expect(hash_result).to eq(expected_hash)
     end
+
+    context 'when serializer has a custom name for root' do
+      subject(:serialized_object) { ChildSerializer.new(object, root: :custom) }
+
+      let(:expected_hash_with_root) { { custom: expected_hash } }
+
+      it 'returns correct json' do
+        expected_hash[:created_at] = expected_hash[:created_at].to_s
+        expect(hash_result).to eq(expected_hash_with_root)
+      end
+    end
   end
 end

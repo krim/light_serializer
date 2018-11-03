@@ -14,14 +14,24 @@ module LightSerializer
     end
 
     def get
-      if raw_object.is_a?(Enumerable)
-        raw_object.map { |entity| transform_to_hash(entity) }
-      else
-        transform_to_hash(raw_object)
+      with_custom_root do
+        if raw_object.is_a?(Enumerable)
+          raw_object.map { |entity| transform_to_hash(entity) }
+        else
+          transform_to_hash(raw_object)
+        end
       end
     end
 
     private
+
+    def with_custom_root
+      custom_root ? { custom_root.to_sym => yield } : yield
+    end
+
+    def custom_root
+      @custom_root ||= serializer.root
+    end
 
     def transform_to_hash(object)
       serializer.class.attributes.each_with_object({}) do |attribute, result|
