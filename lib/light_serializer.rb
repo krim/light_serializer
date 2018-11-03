@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/object/blank'
-
 module LightSerializer
 end
 
-require 'light_serializer/version'
+require './lib/light_serializer/hashed_object'
+require './lib/light_serializer/serializer'
+require './lib/light_serializer/version'
