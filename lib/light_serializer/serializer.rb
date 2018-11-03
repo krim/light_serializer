@@ -1,23 +1,21 @@
 # frozen_string_literal: true
 
 require 'oj'
-require_relative 'hashed_object'
+require './lib/light_serializer/hashed_object'
 
 module LightSerializer
   class Serializer
     attr_reader :object
 
-    class << self
-      def attributes(*new_attributes)
-        return @attributes if new_attributes.empty?
+    def self.attributes(*new_attributes)
+      return @attributes if new_attributes.empty?
 
-        @attributes = @attributes ? @attributes + new_attributes : new_attributes
-      end
+      @attributes = @attributes ? @attributes + new_attributes : new_attributes
+    end
 
-      def inherited(subclass)
-        subclass.attributes(*attributes)
-        super(subclass)
-      end
+    def self.inherited(subclass)
+      subclass.attributes(*attributes)
+      super(subclass)
     end
 
     def initialize(object)

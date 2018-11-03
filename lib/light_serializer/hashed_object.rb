@@ -33,13 +33,24 @@ module LightSerializer
       if attribute.is_a?(Hash)
         values_from_nested_resource(attribute, object, result)
       else
-        value = obtain_value(object, attribute)
+        values_from_current_resource(attribute, object, result)
+      end
+    end
 
-        result[attribute] = if value.is_a?(Array)
-          values_from_for_array(attribute, value, result)
-        else
-          value
-        end
+    def values_from_nested_resource(attribute, object, result)
+      attribute_name = attribute.keys.last
+      nested_serializer = attribute.values.last
+      value = obtain_value(object, attribute_name)
+      result[attribute_name] = nested_serializer.new(value).to_hash
+    end
+
+    def values_from_current_resource(attribute, object, result)
+      value = obtain_value(object, attribute)
+
+      result[attribute] = if value.is_a?(Array)
+        values_from_for_array(attribute, value, result)
+      else
+        value
       end
     end
 
@@ -51,13 +62,6 @@ module LightSerializer
       else
         object
       end
-    end
-
-    def values_from_nested_resource(attribute, object, result)
-      attribute_name = attribute.keys.last
-      nested_serializer = attribute.values.last
-      value = obtain_value(object, attribute_name)
-      result[attribute_name] = nested_serializer.new(value).to_hash
     end
 
     def values_from_for_array(attribute, value, result)

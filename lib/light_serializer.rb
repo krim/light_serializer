@@ -3,6 +3,6 @@
 module LightSerializer
 end
 
-require_relative 'light_serializer/hashed_object'
-require_relative 'light_serializer/serializer'
-require_relative 'light_serializer/version'
+require './lib/light_serializer/hashed_object'
+require './lib/light_serializer/serializer'
+require './lib/light_serializer/version'
