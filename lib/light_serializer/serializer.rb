@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require 'oj'
-require './lib/light_serializer/hashed_object'
+require 'light_serializer/hashed_object'
 
 module LightSerializer
   class Serializer
-    attr_reader :object
+    attr_reader :object, :root
 
     def self.attributes(*new_attributes)
       return @attributes if new_attributes.empty?
@@ -18,8 +18,9 @@ module LightSerializer
       super(subclass)
     end
 
-    def initialize(object)
+    def initialize(object, root: nil)
       @object = object
+      @root = root
     end
 
     def to_json

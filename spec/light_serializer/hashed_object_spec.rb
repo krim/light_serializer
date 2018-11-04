@@ -11,18 +11,18 @@ RSpec.describe LightSerializer::HashedObject do
   let(:serializer) { TinySeriaizer.new(object) }
   let(:expected_hash) { { id: 1, name: 'test' } }
 
-  it 'correctly transform object to hash with correct keys' do
-    expect(hashed_object).to eq(expected_hash)
+  shared_examples 'transform object to correct hash' do
+    specify { expect(hashed_object).to eq(expected_hash) }
   end
+
+  it_behaves_like 'transform object to correct hash'
 
   context 'when serializer has custom methods for one of attribute' do
     let(:object) { OpenStruct.new(id: 1, name: 'test', custom_attribute: 'wrong value') }
     let(:serializer) { BaseSerializer.new(object) }
     let(:expected_hash) { { id: 1, custom_attribute: 'string' } }
 
-    it 'gets value for attributes from serializer first' do
-      expect(hashed_object).to eq(expected_hash)
-    end
+    it_behaves_like 'transform object to correct hash'
   end
 
   context 'when serializer has nested serialization for one of attribute' do
@@ -30,9 +30,7 @@ RSpec.describe LightSerializer::HashedObject do
     let(:serializer) { TinyWithNestedAttributeSerializer.new(object) }
     let(:expected_hash) { { id: 1, name: 'test', nested_attribute: { id: 2, name: 'nested' } } }
 
-    it 'gets correct hash for it' do
-      expect(hashed_object).to eq(expected_hash)
-    end
+    it_behaves_like 'transform object to correct hash'
 
     context 'when attribute is an array of objects' do
       let(:object) do
@@ -45,9 +43,14 @@ RSpec.describe LightSerializer::HashedObject do
       end
       let(:expected_hash) { { id: 1, name: 'test', nested_attribute: [{ id: 2, name: 'nested' }] } }
 
-      it 'gets correct hash for it' do
-        expect(hashed_object).to eq(expected_hash)
-      end
+      it_behaves_like 'transform object to correct hash'
+    end
+
+    context 'when serializer has a custom name for root' do
+      let(:serializer) { TinyWithNestedAttributeSerializer.new(object, root: :tiny_object) }
+      let(:expected_hash) { { tiny_object: { id: 1, name: 'test', nested_attribute: { id: 2, name: 'nested' } } } }
+
+      it_behaves_like 'transform object to correct hash'
     end
   end
 end
