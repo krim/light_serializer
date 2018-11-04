@@ -54,8 +54,9 @@ RSpec.describe LightSerializer::Serializer do
       Oj.load(serialized_object.to_json, mode: :compat, symbol_keys: true)
     end
 
+    before { expected_hash[:created_at] = expected_hash[:created_at].to_s }
+
     it 'returns correct json' do
-      expected_hash[:created_at] = expected_hash[:created_at].to_s
       expect(hash_result).to eq(expected_hash)
     end
 
@@ -65,7 +66,6 @@ RSpec.describe LightSerializer::Serializer do
       let(:expected_hash_with_root) { { custom: expected_hash } }
 
       it 'returns correct json' do
-        expected_hash[:created_at] = expected_hash[:created_at].to_s
         expect(hash_result).to eq(expected_hash_with_root)
       end
     end
