@@ -51,7 +51,7 @@ module LightSerializer
       attribute_name = attribute.keys.last
       nested_serializer = attribute.values.last
       value = obtain_value(object, attribute_name)
-      result[attribute_name] = nested_serializer.new(value).to_hash
+      result[attribute_name] = nested_serializer.new(value, context: serializer.context).to_hash
     end
 
     def values_from_current_resource(attribute, object, result)
