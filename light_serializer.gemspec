@@ -8,7 +8,7 @@ require 'light_serializer/version'
 Gem::Specification.new do |spec|
   spec.name          = 'light_serializer'
   spec.version       = LightSerializer::VERSION
-  spec.authors       = ['krim']
+  spec.authors       = ['Pavel Rodionov', 'Alexander Kotov']
   spec.email         = ['pasha.rod@mail.ru']
 
   spec.summary       = 'Light and Fast Serializer'
