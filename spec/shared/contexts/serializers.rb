@@ -16,6 +16,22 @@ RSpec.shared_context 'with base and nested serializers' do
     )
   end
 
+  class TinyWithContext < ::LightSerializer::Serializer
+    attributes(
+      :url_from_context
+    )
+
+    def url_from_context
+      context.url
+    end
+  end
+
+  class ChildWithContext < TinyWithContext
+    attributes(
+      nested_attribute: TinyWithContext
+    )
+  end
+
   class BaseSerializer < ::LightSerializer::Serializer
     attributes(
       :id,

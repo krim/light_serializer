@@ -69,5 +69,25 @@ RSpec.describe LightSerializer::Serializer do
         expect(hash_result).to eq(expected_hash_with_root)
       end
     end
+
+    context 'when provide context for serialization' do
+      subject(:serialized_object) { TinyWithContext.new(object, context: context) }
+
+      let(:context) { OpenStruct.new(url: 'https://www.example.com') }
+
+      it 'correctly serialize data from context' do
+        expect(hash_result[:url_from_context]).to eq(context.url)
+      end
+    end
+
+    context 'when provided context is used in nested serializer' do
+      subject(:serialized_object) { ChildWithContext.new(object, context: context) }
+
+      let(:context) { OpenStruct.new(url: 'https://www.example.com') }
+
+      it 'correctly serialize data from context' do
+        expect(hash_result[:nested_attribute][:url_from_context]).to eq(context.url)
+      end
+    end
   end
 end

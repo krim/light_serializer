@@ -5,7 +5,7 @@ require 'light_serializer/hashed_object'
 
 module LightSerializer
   class Serializer
-    attr_reader :object, :root
+    attr_reader :object, :root, :context
 
     def self.attributes(*new_attributes)
       return @attributes if new_attributes.empty?
@@ -18,9 +18,10 @@ module LightSerializer
       super(subclass)
     end
 
-    def initialize(object, root: nil)
+    def initialize(object, root: nil, context: nil)
       @object = object
       @root = root
+      @context = context
     end
 
     def to_json
