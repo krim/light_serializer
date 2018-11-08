@@ -32,6 +32,27 @@ RSpec.shared_context 'with base and nested serializers' do
     )
   end
 
+  class TinyWithUsingObject < ::LightSerializer::Serializer
+    attributes(
+      :login
+    )
+
+    def login
+      object.name
+    end
+  end
+
+  class ChildWithUsingObject < TinyWithUsingObject
+    attributes(
+      :uuid,
+      nested_resources: TinyWithUsingObject
+    )
+
+    def uuid
+      object.id
+    end
+  end
+
   class BaseSerializer < ::LightSerializer::Serializer
     attributes(
       :id,
