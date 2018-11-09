@@ -46,11 +46,13 @@ module LightSerializer
     end
 
     def hashed_nested_resource(value, nested_serializer)
-      if value.is_a?(Array)
-        value.map { |entity| nested_serializer.new(entity, context: serializer.context).to_hash }
-      else
-        nested_serializer.new(value, context: serializer.context).to_hash
-      end
+      return hashed_entity(value, nested_serializer) unless value.is_a?(Enumerable)
+
+      value.each_with_object(nested_serializer).map(&method(:hashed_entity))
+    end
+
+    def hashed_entity(entity, nested_serializer)
+      nested_serializer.new(entity, context: serializer.context).to_hash
     end
 
     def values_from_current_resource(attribute, object, result)
