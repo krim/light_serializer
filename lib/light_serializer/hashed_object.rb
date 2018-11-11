@@ -46,9 +46,13 @@ module LightSerializer
     end
 
     def hashed_nested_resource(value, nested_serializer)
-      return hashed_entity(value, nested_serializer) unless value.is_a?(Enumerable)
+      return hashed_entity(value, nested_serializer) unless can_be_enumerated?(value)
 
       value.each_with_object(nested_serializer).map(&method(:hashed_entity))
+    end
+
+    def can_be_enumerated?(value)
+      value.is_a?(Enumerable) || value.respond_to?(:each)
     end
 
     def hashed_entity(entity, nested_serializer)
@@ -76,7 +80,7 @@ module LightSerializer
     end
 
     def values_from_for_array(attribute, value, result)
-      value.map { |entity| obtain_values(attribute, entity, result) }
+      value.map { |entity| entity.is_a?(Hash) ? entity : obtain_values(attribute, entity, result) }
     end
   end
 end
