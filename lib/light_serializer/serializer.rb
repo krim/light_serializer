@@ -5,7 +5,7 @@ require 'light_serializer/hashed_object'
 
 module LightSerializer
   class Serializer
-    attr_reader :object, :root, :context
+    attr_reader :object, :root, :context, :meta
 
     def self.attributes(*new_attributes)
       return @attributes if new_attributes.empty?
@@ -18,18 +18,19 @@ module LightSerializer
       super(subclass)
     end
 
-    def initialize(object, root: nil, context: nil)
+    def initialize(object, root: nil, context: nil, meta: nil)
       @object = object
       @root = root
       @context = context
+      @meta = meta
     end
 
     def to_json
-      Oj.dump(hashed_object, mode: :compat)
+      Oj.dump(to_hash, mode: :compat)
     end
 
     def to_hash
-      hashed_object
+      meta ? hashed_object.merge(meta: meta) : hashed_object
     end
 
     private
