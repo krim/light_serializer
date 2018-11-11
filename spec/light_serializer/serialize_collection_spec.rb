@@ -31,4 +31,17 @@ RSpec.describe LightSerializer::SerializeCollection do
       expect(hash_result).to eq(expected_hash)
     end
   end
+
+  context 'when one of serializers use SerializeCollection in custom method' do
+    subject(:serialized_collection) { ChildWithSerializeCollection.new(collection.first) }
+
+    let(:expected_hash) do
+      { id: 1, login: 'ololo', nested_resources: [{ login: 'nested_ololo' }] }
+    end
+    let(:hash_result) { serialized_collection.to_hash }
+
+    it 'correctly hashed it' do
+      expect(hash_result).to eq(expected_hash)
+    end
+  end
 end

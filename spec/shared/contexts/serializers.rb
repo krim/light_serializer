@@ -53,6 +53,17 @@ RSpec.shared_context 'with base and nested serializers' do
     end
   end
 
+  class ChildWithSerializeCollection < TinyWithUsingObject
+    attributes(
+      :id,
+      :nested_resources
+    )
+
+    def nested_resources
+      ::LightSerializer::SerializeCollection.new(object.nested_resources, serializer: TinyWithUsingObject).to_hash
+    end
+  end
+
   class BaseSerializer < ::LightSerializer::Serializer
     attributes(
       :id,
