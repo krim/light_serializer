@@ -70,6 +70,16 @@ RSpec.describe LightSerializer::Serializer do
       end
     end
 
+    context 'when serializer has a meta field' do
+      subject(:serialized_object) { ChildSerializer.new(object, root: :custom, meta: { field: 'meta' }) }
+
+      let(:expected_hash_with_root) { { custom: expected_hash, meta: { field: 'meta' } } }
+
+      it 'returns correct json' do
+        expect(hash_result).to eq(expected_hash_with_root)
+      end
+    end
+
     context 'when provide context for serialization' do
       subject(:serialized_object) { TinyWithContext.new(object, context: context) }
 
