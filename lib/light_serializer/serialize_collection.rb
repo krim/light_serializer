@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'light_serializer/helpers/with_custom_root'
-require 'light_serializer/serializer'
-
 module LightSerializer
   class SerializeCollection
     include Helpers::WithCustomRoot

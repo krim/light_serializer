@@ -3,6 +3,7 @@
 module LightSerializer
 end
 
+require 'oj'
 require 'light_serializer/helpers/with_custom_root'
 require 'light_serializer/hashed_object'
 require 'light_serializer/serializer'

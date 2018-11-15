@@ -204,7 +204,7 @@ def benchmark_collection(ams_arg: '', oj_arg: '')
                    ).to_json
                  end,
                  -> { Surrealist.surrealize_collection(users) },
-                 -> { UserLightSerializer.new(users).to_json },
+                 -> {  LightSerializer::SerializeCollection.new(users, serializer: UserLightSerializer).to_json },
                  -> { UserSurrealistSerializer.new(users).surrealize },
                  -> { users.to_json(only: %i[name email]) },
                  -> { UserBlueprint.render(users) }]
@@ -251,7 +251,7 @@ def benchmark_associations_collection
                    ).to_json
                  end,
                  -> { Surrealist.surrealize_collection(collection) },
-                 -> { AuthorLightSerializer.new(collection).to_json },
+                 -> { LightSerializer::SerializeCollection.new(collection, serializer: AuthorLightSerializer).to_json },
                  -> { AuthorSurrealistSerializer.new(collection).surrealize },
                  lambda do
                    collection.to_json(only: %i[name last_name age], methods: %i[full_name],
