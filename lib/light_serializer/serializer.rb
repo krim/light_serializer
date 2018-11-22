@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'oj'
-require 'light_serializer/hashed_object'
-
 module LightSerializer
   class Serializer
     attr_reader :object, :root, :context, :meta
@@ -30,7 +27,7 @@ module LightSerializer
     end
 
     def to_hash
-      meta ? hashed_object.merge(meta: meta) : hashed_object
+      meta ? hashed_object.merge!(meta: meta) : hashed_object
     end
 
     private

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'light_serializer/helpers/with_custom_root'
-
 module LightSerializer
   class HashedObject
     include Helpers::WithCustomRoot
@@ -48,7 +46,7 @@ module LightSerializer
     def hashed_nested_resource(value, nested_serializer)
       return hashed_entity(value, nested_serializer) unless can_be_enumerated?(value)
 
-      value.each_with_object(nested_serializer).map(&method(:hashed_entity))
+      value.each_with_object(nested_serializer).map { |entity, serializer| hashed_entity(entity, serializer) }
     end
 
     def can_be_enumerated?(value)
