@@ -1,11 +1,45 @@
-# light_serializer
+# Light Serializer
+
 Light and Fast serializer
 
 [![Build Status](https://travis-ci.org/krim/light_serializer.svg?branch=master)](https://travis-ci.org/krim/light_serializer)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b9167078ec6b75117d0d/maintainability)](https://codeclimate.com/github/krim/light_serializer/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b9167078ec6b75117d0d/test_coverage)](https://codeclimate.com/github/krim/light_serializer/test_coverage)
 
-LS is a JSON Object Presenter that takes business objects and breaks them down into simple hashes and serializes them to JSON. It can be used in Rails in place of other serializers (like JBuilder or ActiveModelSerializers). It is designed to be simple, direct, and performant.
+LS is a JSON Object Presenter that takes business objects and breaks them down into simple hashes and serializes them to JSON. It can be used in Rails(or other ruby application) in place of other serializers (like JBuilder or ActiveModelSerializers). It is designed to be simple, direct, and performant.
+
+### Performant comparison
+All performant comparison results are available [here](https://github.com/krim/light_serializer/blob/master/performance_comparison.md). You can run benchmark by yourself.
+```bash
+git clone git@github.com:krim/light_serializer.git
+cd light_serializer
+ruby bench.rb
+
+```
+
+## Table of Contents
+
+* [Install](#install)
+* [Usage](#usage)
+  * [Basic](#basic)
+  * [Custom method names](#custom-method-names)
+  * [Associations](#associations)
+  * [Custom root](#custom-root)
+  * [Collection serializer](#collection-serializer)
+  
+## Install
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'light_serializer'
+```
+
+Execute:
+
+```bash
+$ bundle install
+```
 
 
 ## Usage
@@ -36,9 +70,8 @@ And the output would look like:
 }
 ```
 
-### Renaming
-
-You can rename the resulting JSON keys in both fields and associations by define custom method:
+### Custom method names
+You can rename the resulting JSON keys in both fields and associations by defining custom method:
 
 ```ruby
 class UserSeriaizer < LightSerializer::Serializer
@@ -62,7 +95,7 @@ This will result in JSON that looks something like this:
 ```
 
 ### Associations
-You may include associated objects. Say for example, a user has projects:
+You may include associated objects. Say, for example, a user has projects:
 
 ```ruby
 class ProjectSerializer < LightSerializer::Serializer
@@ -106,7 +139,7 @@ Output:
 ```
 
 ### Custom root
-By default, returned JSON doesn't have root. You may specify it by option in serializer's initializer:
+By default, returned JSON doesn't have root. You may specify it by the option in serializer's initializer:
 ```ruby
 puts UserSeriaizer.new(user, root: :person).to_json
 ```

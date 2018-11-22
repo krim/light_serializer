@@ -1,12 +1,20 @@
 # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-require 'surrealist'
-require 'light_serializer'
-require 'benchmark/ips'
-require 'active_record'
-require 'active_model'
-require 'active_model_serializers'
-require 'blueprinter'
-require 'pry'
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+
+  gem 'activerecord', require: 'active_record'
+  gem 'activemodel'
+  gem 'sqlite3'
+  gem 'light_serializer'
+  gem 'active_model_serializers'
+  gem 'blueprinter'
+  gem 'surrealist'
+  gem 'benchmark-ips', require: 'benchmark/ips'
+end
+
+puts 'Gems installed and loaded!'
 
 ActiveRecord::Base.establish_connection(
   adapter:  'sqlite3',
