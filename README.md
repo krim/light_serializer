@@ -2,8 +2,10 @@
 Light and Fast serializer
 
 [![Build Status](https://travis-ci.org/krim/light_serializer.svg?branch=master)](https://travis-ci.org/krim/light_serializer)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b9167078ec6b75117d0d/maintainability)](https://codeclimate.com/github/krim/light_serializer/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b9167078ec6b75117d0d/test_coverage)](https://codeclimate.com/github/krim/light_serializer/test_coverage)
 
-LS is a JSON Object Presenter that takes business objects and breaks them down into simple hashes and serializes them to JSON. It can be used in Rails in place of other serializers (like JBuilder or ActiveModelSerializers). It is designed to be simple, direct, and performant
+LS is a JSON Object Presenter that takes business objects and breaks them down into simple hashes and serializes them to JSON. It can be used in Rails in place of other serializers (like JBuilder or ActiveModelSerializers). It is designed to be simple, direct, and performant.
 
 
 ## Usage
@@ -61,6 +63,7 @@ This will result in JSON that looks something like this:
 
 ### Associations
 You may include associated objects. Say for example, a user has projects:
+
 ```ruby
 class ProjectSerializer < LightSerializer::Serializer
   attributes :uuid, :name
