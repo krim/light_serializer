@@ -36,8 +36,8 @@ module LightSerializer
     end
 
     def values_from_nested_resource(attribute, object, result)
-      attribute_name = attribute.keys.last
-      nested_serializer = attribute.values.last
+      attribute_name = attribute.keys[-1]
+      nested_serializer = attribute.values[-1]
 
       value = obtain_value(object, attribute_name)
       result[attribute_name] = hashed_nested_resource(value, nested_serializer)
