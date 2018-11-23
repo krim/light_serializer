@@ -50,7 +50,11 @@ module LightSerializer
     end
 
     def can_be_enumerated?(value)
-      value.is_a?(Enumerable) || value.respond_to?(:each)
+      value.is_a?(Enumerable) || active_record_relation?(value)
+    end
+
+    def active_record_relation?(object)
+      !!(defined?(ActiveRecord::Relation) && object.is_a?(ActiveRecord::Relation))
     end
 
     def hashed_entity(entity, nested_serializer)
