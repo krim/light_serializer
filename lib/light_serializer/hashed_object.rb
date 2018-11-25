@@ -36,8 +36,8 @@ module LightSerializer
     end
 
     def values_from_nested_resource(attribute, object, result)
-      attribute_name = attribute.keys.last
-      nested_serializer = attribute.values.last
+      attribute_name = attribute.keys[-1]
+      nested_serializer = attribute.values[-1]
 
       value = obtain_value(object, attribute_name)
       result[attribute_name] = hashed_nested_resource(value, nested_serializer)
@@ -50,7 +50,11 @@ module LightSerializer
     end
 
     def can_be_enumerated?(value)
-      value.is_a?(Enumerable) || value.respond_to?(:each)
+      value.is_a?(Enumerable) || active_record_relation?(value)
+    end
+
+    def active_record_relation?(object)
+      !!(defined?(ActiveRecord::Relation) && object.is_a?(ActiveRecord::Relation))
     end
 
     def hashed_entity(entity, nested_serializer)

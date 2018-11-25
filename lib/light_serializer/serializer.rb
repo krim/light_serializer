@@ -7,7 +7,7 @@ module LightSerializer
     def self.attributes(*new_attributes)
       return @attributes if new_attributes.empty?
 
-      @attributes = @attributes ? @attributes + new_attributes : new_attributes
+      @attributes = @attributes ? @attributes.concat(new_attributes) : new_attributes
     end
 
     def self.inherited(subclass)
