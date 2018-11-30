@@ -14,7 +14,7 @@ RSpec.describe LightSerializer::SerializeCollection do
     [{ uuid: 1, login: 'ololo', nested_resources: [{ login: 'nested_ololo' }] }]
   end
 
-  context '#to_json' do
+  describe '#to_json' do
     let(:hash_result) do
       Oj.load(serialized_collection.to_json, mode: :compat, symbol_keys: true)
     end
@@ -22,9 +22,24 @@ RSpec.describe LightSerializer::SerializeCollection do
     it 'correctly serialized collection' do
       expect(hash_result).to eq(expected_hash)
     end
+
+    context 'when root key is present' do
+      subject(:serialized_collection) do
+        described_class.new(collection, serializer: ChildWithUsingObject, root: :root_key)
+      end
+
+      let(:expected_json) do
+        hash = { root_key: [{ login: 'ololo', uuid: 1, nested_resources: [{ login: 'nested_ololo' }] }] }
+        Oj.dump(hash, mode: :compat)
+      end
+
+      it 'correctly serialized collection' do
+        expect(serialized_collection.to_json).to eq(expected_json)
+      end
+    end
   end
 
-  context '#to_hash' do
+  describe '#to_hash' do
     let(:hash_result) { serialized_collection.to_hash }
 
     it 'correctly hashed collection' do

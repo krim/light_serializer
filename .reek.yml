@@ -8,3 +8,5 @@ detectors:
 
 exclude_paths:
   - vendor
+  - ./bench.rb
+

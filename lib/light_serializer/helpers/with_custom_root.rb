@@ -3,8 +3,9 @@
 module LightSerializer
   module Helpers
     module WithCustomRoot
+      # :reek:UtilityFunction
       def with_custom_root(root)
-        root ? { root => yield } : yield
+        root ? { root.to_s => yield } : yield
       end
     end
   end
