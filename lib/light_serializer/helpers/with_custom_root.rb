@@ -4,7 +4,7 @@ module LightSerializer
   module Helpers
     module WithCustomRoot
       def with_custom_root(root)
-        root ? { root.to_sym => yield } : yield
+        root ? { root => yield } : yield
       end
     end
   end
