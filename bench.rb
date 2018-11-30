@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
 require 'bundler/inline'
 
@@ -297,3 +299,4 @@ benchmark_collection(ams_arg: '(without logging)', oj_arg: '(with Oj)')
 # Associations
 benchmark_associations_instance
 benchmark_associations_collection
+# rubocop:enable Metrics/AbcSize,Metrics/MethodLength

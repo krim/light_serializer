@@ -14,7 +14,7 @@ module LightSerializer
     end
 
     def to_json
-      with_custom_root(root) { Oj.dump(hashed_collection, mode: :compat) }
+      Oj.dump(collection_with_root, mode: :compat)
     end
 
     def to_hash
@@ -22,6 +22,10 @@ module LightSerializer
     end
 
     private
+
+    def collection_with_root
+      with_custom_root(root) { hashed_collection }
+    end
 
     def hashed_collection
       collection.map { |entity| serializer.new(entity, context: context).to_hash }

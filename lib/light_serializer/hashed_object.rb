@@ -54,7 +54,7 @@ module LightSerializer
     end
 
     def active_record_relation?(object)
-      !!(defined?(ActiveRecord::Relation) && object.is_a?(ActiveRecord::Relation))
+      defined?(ActiveRecord::Relation) && object.is_a?(ActiveRecord::Relation)
     end
 
     def hashed_entity(entity, nested_serializer)
@@ -71,6 +71,7 @@ module LightSerializer
       end
     end
 
+    # :reek:ManualDispatch
     def obtain_value(object, attribute)
       if serializer.respond_to?(attribute)
         serializer.public_send(attribute)

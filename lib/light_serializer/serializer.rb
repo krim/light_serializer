@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:TooManyInstanceVariables { max_instance_variables: 5 }
 module LightSerializer
   class Serializer
     attr_reader :object, :root, :context, :meta
