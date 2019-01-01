@@ -6,7 +6,7 @@ module LightSerializer
     attr_reader :object, :root, :context, :meta
 
     def self.attributes(*new_attributes)
-      return @attributes if new_attributes.empty?
+      return (@attributes || []) if new_attributes.empty?
 
       @attributes = @attributes ? @attributes.concat(new_attributes) : new_attributes
     end

@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.shared_context 'with base and nested serializers' do
+  class EmptySeriaizer < ::LightSerializer::Serializer
+    attributes()
+  end
+
   class TinySeriaizer < ::LightSerializer::Serializer
     attributes(
       :id,
@@ -12,7 +16,8 @@ RSpec.shared_context 'with base and nested serializers' do
     attributes(
       :id,
       :name,
-      nested_attribute: TinySeriaizer
+      nested_attribute: TinySeriaizer,
+      additional_nested_attribute: TinySeriaizer
     )
   end
 

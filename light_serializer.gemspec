@@ -22,7 +22,6 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.3'
   spec.add_dependency 'oj', '~> 3'
   spec.add_development_dependency 'bundler', '~> 1.0'
-  spec.add_development_dependency 'factory_bot', '~> 4.11'
   spec.add_development_dependency 'pry-byebug', '~> 3.0'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'reek', '~> 5.1'
