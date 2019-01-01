@@ -17,6 +17,14 @@ RSpec.describe LightSerializer::HashedObject do
 
   it_behaves_like 'transform object to correct hash'
 
+  context 'when serializer with empty attributes' do
+    let(:object) { OpenStruct.new(id: 1) }
+    let(:serializer) { EmptySeriaizer.new(object) }
+    let(:expected_hash) { {} }
+
+    it_behaves_like 'transform object to correct hash'
+  end
+
   context 'when serializer has custom methods for one of attribute' do
     let(:object) { OpenStruct.new(id: 1, name: 'test', custom_attribute: 'wrong value') }
     let(:serializer) { BaseSerializer.new(object) }
@@ -26,9 +34,23 @@ RSpec.describe LightSerializer::HashedObject do
   end
 
   context 'when serializer has nested serialization for one of attribute' do
-    let(:object) { OpenStruct.new(id: 1, name: 'test', nested_attribute: OpenStruct.new(id: 2, name: 'nested')) }
+    let(:object) do
+      OpenStruct.new(
+        id: 1,
+        name: 'test',
+        nested_attribute: OpenStruct.new(id: 2, name: 'nested'),
+        additional_nested_attribute: OpenStruct.new(id: 3, name: 'additional_nested')
+      )
+    end
     let(:serializer) { TinyWithNestedAttributeSerializer.new(object) }
-    let(:expected_hash) { { id: 1, name: 'test', nested_attribute: { id: 2, name: 'nested' } } }
+    let(:expected_hash) do
+      {
+        id: 1,
+        name: 'test',
+        nested_attribute: { id: 2, name: 'nested' },
+        additional_nested_attribute: { id: 3, name: 'additional_nested' }
+      }
+    end
 
     it_behaves_like 'transform object to correct hash'
 
@@ -38,17 +60,25 @@ RSpec.describe LightSerializer::HashedObject do
           id: 1,
           extra_field: 'extra',
           name: 'test',
-          nested_attribute: [OpenStruct.new(id: 2, extra_field: 'nested_extra', name: 'nested')]
+          nested_attribute: [OpenStruct.new(id: 2, extra_field: 'nested_extra', name: 'nested')],
+          additional_nested_attribute: [OpenStruct.new(id: 3, extra_field: 'nested_extra', name: 'additional_nested')]
         )
       end
-      let(:expected_hash) { { id: 1, name: 'test', nested_attribute: [{ id: 2, name: 'nested' }] } }
+      let(:expected_hash) do
+        {
+          id: 1,
+          name: 'test',
+          nested_attribute: [{ id: 2, name: 'nested' }],
+          additional_nested_attribute: [{ id: 3, name: 'additional_nested' }]
+        }
+      end
 
       it_behaves_like 'transform object to correct hash'
     end
 
     context 'when serializer has a custom name for root' do
       let(:serializer) { TinyWithNestedAttributeSerializer.new(object, root: :tiny_object) }
-      let(:expected_hash) { { 'tiny_object' => { id: 1, name: 'test', nested_attribute: { id: 2, name: 'nested' } } } }
+      let(:expected_hash) { { 'tiny_object' => super() } }
 
       it_behaves_like 'transform object to correct hash'
     end
