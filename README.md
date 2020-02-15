@@ -2,6 +2,7 @@
 
 Light and Fast serializer
 
+[![Gem Version](https://badge.fury.io/rb/light_serializer.svg)](https://badge.fury.io/rb/light_serializer)
 [![Build Status](https://travis-ci.org/krim/light_serializer.svg?branch=master)](https://travis-ci.org/krim/light_serializer)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b9167078ec6b75117d0d/maintainability)](https://codeclimate.com/github/krim/light_serializer/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b9167078ec6b75117d0d/test_coverage)](https://codeclimate.com/github/krim/light_serializer/test_coverage)
