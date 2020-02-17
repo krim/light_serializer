@@ -60,6 +60,16 @@ RSpec.describe LightSerializer::Serializer do
       expect(hash_result).to eq(expected_hash)
     end
 
+    context 'when serializer have attribute but object does not have one' do
+      subject(:serialized_object)  { TinyWithUnknownAttributeSeriaizer.new(object) }
+
+      let(:expected_hash_with_unknown) { { id: 123, name: 'Foo', unknown: nil } }
+
+      it 'returns correct json' do
+        expect(hash_result).to eq(expected_hash_with_unknown)
+      end
+    end
+
     context 'when serializer has a custom name for root' do
       subject(:serialized_object) { ChildSerializer.new(object, root: :custom) }
 

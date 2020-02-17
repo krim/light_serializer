@@ -76,7 +76,7 @@ module LightSerializer
         serializer.public_send(attribute)
       elsif object.respond_to?(attribute)
         object.public_send(attribute)
-      else
+      elsif raw_object != object
         object
       end
     end
