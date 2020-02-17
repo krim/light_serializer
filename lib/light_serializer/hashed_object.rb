@@ -4,6 +4,8 @@ module LightSerializer
   class HashedObject
     include Helpers::WithCustomRoot
 
+    UnknownAttribute = Class.new(RuntimeError)
+
     attr_reader :raw_object, :serializer
 
     def self.get(*args)
@@ -37,7 +39,7 @@ module LightSerializer
 
     def values_from_nested_resource(attributes, object, result)
       attributes.each do |attribute_name, nested_serializer|
-        value = obtain_value(object, attribute_name)
+        value = obtain_value(object, attribute_name, nested_serializer)
         result[attribute_name] = hashed_nested_resource(value, nested_serializer)
       end
     end
@@ -71,13 +73,15 @@ module LightSerializer
     end
 
     # :reek:ManualDispatch
-    def obtain_value(object, attribute)
+    def obtain_value(object, attribute, nested_serializer = nil)
       if serializer.respond_to?(attribute)
         serializer.public_send(attribute)
       elsif object.respond_to?(attribute)
         object.public_send(attribute)
       elsif raw_object != object
         object
+      elsif !nested_serializer
+        raise UnknownAttribute, "Unknown attribute: #{attribute}"
       end
     end
 

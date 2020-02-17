@@ -63,10 +63,9 @@ RSpec.describe LightSerializer::Serializer do
     context 'when serializer have attribute but object does not have one' do
       subject(:serialized_object)  { TinyWithUnknownAttributeSeriaizer.new(object) }
 
-      let(:expected_hash_with_unknown) { { id: 123, name: 'Foo', unknown: nil } }
-
-      it 'returns correct json' do
-        expect(hash_result).to eq(expected_hash_with_unknown)
+      it 'raises an error' do
+        expect { hash_result }.
+          to raise_error(LightSerializer::HashedObject::UnknownAttribute, 'Unknown attribute: unknown')
       end
     end
 
