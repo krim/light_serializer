@@ -60,6 +60,15 @@ RSpec.describe LightSerializer::Serializer do
       expect(hash_result).to eq(expected_hash)
     end
 
+    context 'when serializer have attribute but object does not have one' do
+      subject(:serialized_object)  { TinyWithUnknownAttributeSeriaizer.new(object) }
+
+      it 'raises an error' do
+        expect { hash_result }.
+          to raise_error(LightSerializer::HashedObject::UnknownAttribute, 'Unknown attribute: unknown')
+      end
+    end
+
     context 'when serializer has a custom name for root' do
       subject(:serialized_object) { ChildSerializer.new(object, root: :custom) }
 

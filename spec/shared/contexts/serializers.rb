@@ -12,6 +12,14 @@ RSpec.shared_context 'with base and nested serializers' do
     )
   end
 
+  class TinyWithUnknownAttributeSeriaizer < ::LightSerializer::Serializer
+    attributes(
+      :id,
+      :name,
+      :unknown
+    )
+  end
+
   class TinyWithNestedAttributeSerializer < ::LightSerializer::Serializer
     attributes(
       :id,
