@@ -4,12 +4,14 @@ module LightSerializer
   class HashedObject
     include Helpers::WithCustomRoot
 
+    ACTIVE_RECORD_ENABLED = defined?(ActiveRecord::Relation)
+
     UnknownAttribute = Class.new(RuntimeError)
 
     attr_reader :raw_object, :serializer
 
-    def self.get(*args)
-      new(*args).get
+    def self.get(raw_object, serializer)
+      new(raw_object, serializer).get
     end
 
     def initialize(raw_object, serializer)
@@ -55,7 +57,7 @@ module LightSerializer
     end
 
     def active_record_relation?(object)
-      defined?(ActiveRecord::Relation) && object.is_a?(ActiveRecord::Relation)
+      ACTIVE_RECORD_ENABLED && object.is_a?(ActiveRecord::Relation)
     end
 
     def hashed_entity(entity, nested_serializer)

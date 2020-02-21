@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '~> 0.80.0'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.30'
   spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'benchmark-ips'
 end
