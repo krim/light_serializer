@@ -4,177 +4,177 @@
 * Surrealist
 * Blueprinter
 
-All tests were made on MB Pro 2015 15".
+All tests were made on MB Pro 2015 15" ruby 2.7.0.
 
 ```
 Warming up --------------------------------------
-      AMS : instance     2.225k i/100ms
+      AMS : instance     3.360k i/100ms
 Surrealist: instance through .surrealize
-                         4.012k i/100ms
-LightSerializer: instance through .to_json
-                         8.733k i/100ms
+                         5.967k i/100ms
+Light: instance through .to_json
+                        11.219k i/100ms
 Surrealist: instance through Surrealist::Serializer
-                         2.854k i/100ms
+                         4.141k i/100ms
 ActiveModel::Serializers::JSON instance
-                         2.404k i/100ms
-         Blueprinter     4.747k i/100ms
+                         3.972k i/100ms
+         Blueprinter     7.770k i/100ms
 Calculating -------------------------------------
-      AMS : instance     23.170k (± 3.1%) i/s -    117.925k in   5.094753s
+      AMS : instance     34.399k (± 5.2%) i/s -    174.720k in   5.092856s
 Surrealist: instance through .surrealize
-                         41.814k (± 2.6%) i/s -    212.636k in   5.089193s
-LightSerializer: instance through .to_json
-                         91.327k (± 2.5%) i/s -    462.849k in   5.071370s
+                         63.060k (± 3.1%) i/s -    316.251k in   5.020067s
+Light: instance through .to_json
+                        117.218k (± 2.8%) i/s -    594.607k in   5.076736s
 Surrealist: instance through Surrealist::Serializer
-                         29.131k (± 2.8%) i/s -    145.554k in   5.000956s
+                         42.938k (± 2.4%) i/s -    215.332k in   5.017979s
 ActiveModel::Serializers::JSON instance
-                         24.605k (± 2.0%) i/s -    125.008k in   5.082821s
-         Blueprinter     49.770k (± 3.3%) i/s -    251.591k in   5.061158s
+                         41.108k (± 3.2%) i/s -    206.544k in   5.029439s
+         Blueprinter     81.052k (± 5.1%) i/s -    411.810k in   5.093396s
 
 Comparison:
-LightSerializer: instance through .to_json:    91327.3 i/s
-         Blueprinter:    49770.4 i/s - 1.83x  slower
-Surrealist: instance through .surrealize:    41813.5 i/s - 2.18x  slower
-Surrealist: instance through Surrealist::Serializer:    29130.9 i/s - 3.14x  slower
-ActiveModel::Serializers::JSON instance:    24604.5 i/s - 3.71x  slower
-      AMS : instance:    23169.7 i/s - 3.94x  slower
+Light: instance through .to_json:   117217.6 i/s
+         Blueprinter:    81051.7 i/s - 1.45x  slower
+Surrealist: instance through .surrealize:    63059.9 i/s - 1.86x  slower
+Surrealist: instance through Surrealist::Serializer:    42938.3 i/s - 2.73x  slower
+ActiveModel::Serializers::JSON instance:    41107.9 i/s - 2.85x  slower
+      AMS : instance:    34399.0 i/s - 3.41x  slower
 
 Warming up --------------------------------------
     AMS : collection     1.000  i/100ms
 Surrealist: collection through Surrealist.surrealize_collection()
-                         1.000  i/100ms
-LightSerializer: collection through .to_json
-                         1.000  i/100ms
+                         2.000  i/100ms
+Light: collection through .to_json
+                         4.000  i/100ms
 Surrealist: collection through Surrealist::Serializer
-                         1.000  i/100ms
+                         2.000  i/100ms
 ActiveModel::Serializers::JSON collection
                          1.000  i/100ms
 Blueprinter collection
-                         1.000  i/100ms
+                         4.000  i/100ms
 Calculating -------------------------------------
-    AMS : collection      5.801  (± 0.0%) i/s -     29.000  in   5.004853s
+    AMS : collection     15.284  (± 6.5%) i/s -     77.000  in   5.053401s
 Surrealist: collection through Surrealist.surrealize_collection()
-                          9.691  (± 0.0%) i/s -     49.000  in   5.063183s
-LightSerializer: collection through .to_json
-                         19.861  (± 5.0%) i/s -    100.000  in   5.044340s
+                         23.420  (± 4.3%) i/s -    118.000  in   5.052662s
+Light: collection through .to_json
+                         47.073  (± 2.1%) i/s -    236.000  in   5.016778s
 Surrealist: collection through Surrealist::Serializer
-                          7.964  (± 0.0%) i/s -     40.000  in   5.029143s
+                         20.336  (± 9.8%) i/s -    102.000  in   5.047930s
 ActiveModel::Serializers::JSON collection
-                          6.601  (± 0.0%) i/s -     33.000  in   5.002701s
+                         18.517  (± 5.4%) i/s -     93.000  in   5.031023s
 Blueprinter collection
-                         18.376  (± 5.4%) i/s -     92.000  in   5.015767s
+                         39.442  (±12.7%) i/s -    192.000  in   5.091428s
 
 Comparison:
-LightSerializer: collection through .to_json:       19.9 i/s
-Blueprinter collection:       18.4 i/s - same-ish: difference falls within error
-Surrealist: collection through Surrealist.surrealize_collection():        9.7 i/s - 2.05x  slower
-Surrealist: collection through Surrealist::Serializer:        8.0 i/s - 2.49x  slower
-ActiveModel::Serializers::JSON collection:        6.6 i/s - 3.01x  slower
-    AMS : collection:        5.8 i/s - 3.42x  slower
+Light: collection through .to_json:       47.1 i/s
+Blueprinter collection:       39.4 i/s - 1.19x  slower
+Surrealist: collection through Surrealist.surrealize_collection():       23.4 i/s - 2.01x  slower
+Surrealist: collection through Surrealist::Serializer:       20.3 i/s - 2.31x  slower
+ActiveModel::Serializers::JSON collection:       18.5 i/s - 2.54x  slower
+    AMS : collection:       15.3 i/s - 3.08x  slower
 
 
 ------- Turning off AMS logger -------
 Warming up --------------------------------------
 AMS(without logging) : instance
-                         2.554k i/100ms
+                         3.389k i/100ms
 Surrealist: instance through .surrealize
-                         4.451k i/100ms
-LightSerializer: instance through .to_json
-                         9.498k i/100ms
+                         5.961k i/100ms
+Light: instance through .to_json
+                        11.179k i/100ms
 Surrealist: instance through Surrealist::Serializer
-                         3.090k i/100ms
+                         4.160k i/100ms
 ActiveModel::Serializers::JSON instance
-                         2.683k i/100ms
-         Blueprinter     5.318k i/100ms
+                         4.013k i/100ms
+         Blueprinter     8.052k i/100ms
 Calculating -------------------------------------
 AMS(without logging) : instance
-                         25.965k (± 3.8%) i/s -    130.254k in   5.024395s
+                         34.713k (± 4.4%) i/s -    176.228k in   5.085983s
 Surrealist: instance through .surrealize
-                         45.524k (± 4.9%) i/s -    231.452k in   5.097901s
-LightSerializer: instance through .to_json
-                         99.406k (± 2.8%) i/s -    503.394k in   5.067891s
+                         62.371k (± 6.0%) i/s -    315.933k in   5.091054s
+Light: instance through .to_json
+                        117.991k (± 3.2%) i/s -    592.487k in   5.026749s
 Surrealist: instance through Surrealist::Serializer
-                         32.110k (± 2.9%) i/s -    160.680k in   5.008350s
+                         43.387k (± 2.4%) i/s -    220.480k in   5.084769s
 ActiveModel::Serializers::JSON instance
-                         27.232k (± 2.8%) i/s -    136.833k in   5.028844s
-         Blueprinter     54.973k (± 2.7%) i/s -    276.536k in   5.033870s
+                         41.593k (± 2.9%) i/s -    208.676k in   5.021385s
+         Blueprinter     80.443k (± 8.1%) i/s -    402.600k in   5.039619s
 
 Comparison:
-LightSerializer: instance through .to_json:    99406.0 i/s
-         Blueprinter:    54973.4 i/s - 1.81x  slower
-Surrealist: instance through .surrealize:    45523.7 i/s - 2.18x  slower
-Surrealist: instance through Surrealist::Serializer:    32110.0 i/s - 3.10x  slower
-ActiveModel::Serializers::JSON instance:    27232.1 i/s - 3.65x  slower
-AMS(without logging) : instance:    25965.2 i/s - 3.83x  slower
+Light: instance through .to_json:   117991.5 i/s
+         Blueprinter:    80443.3 i/s - 1.47x  slower
+Surrealist: instance through .surrealize:    62370.6 i/s - 1.89x  slower
+Surrealist: instance through Surrealist::Serializer:    43387.3 i/s - 2.72x  slower
+ActiveModel::Serializers::JSON instance:    41592.8 i/s - 2.84x  slower
+AMS(without logging) : instance:    34713.2 i/s - 3.40x  slower
 
 Warming up --------------------------------------
 AMS(without logging) : collection
                          1.000  i/100ms
 Surrealist: collection through Surrealist.surrealize_collection()
-                         1.000  i/100ms
-LightSerializer: collection through .to_json
-                         1.000  i/100ms
+                         2.000  i/100ms
+Light: collection through .to_json
+                         4.000  i/100ms
 Surrealist: collection through Surrealist::Serializer
-                         1.000  i/100ms
+                         2.000  i/100ms
 ActiveModel::Serializers::JSON collection
                          1.000  i/100ms
 Blueprinter collection
-                         1.000  i/100ms
+                         4.000  i/100ms
 Calculating -------------------------------------
 AMS(without logging) : collection
-                          5.729  (± 0.0%) i/s -     29.000  in   5.065254s
+                         15.411  (± 6.5%) i/s -     77.000  in   5.008486s
 Surrealist: collection through Surrealist.surrealize_collection()
-                          9.684  (± 0.0%) i/s -     49.000  in   5.063764s
-LightSerializer: collection through .to_json
-                         19.538  (± 5.1%) i/s -     98.000  in   5.026798s
+                         23.688  (± 4.2%) i/s -    120.000  in   5.070850s
+Light: collection through .to_json
+                         47.411  (± 2.1%) i/s -    240.000  in   5.066069s
 Surrealist: collection through Surrealist::Serializer
-                          7.836  (± 0.0%) i/s -     40.000  in   5.110566s
+                         19.842  (±10.1%) i/s -    100.000  in   5.090176s
 ActiveModel::Serializers::JSON collection
-                          6.518  (± 0.0%) i/s -     33.000  in   5.067046s
+                         18.901  (± 5.3%) i/s -     95.000  in   5.033870s
 Blueprinter collection
-                         18.106  (± 5.5%) i/s -     91.000  in   5.034963s
+                         40.840  (± 4.9%) i/s -    204.000  in   5.003479s
 
 Comparison:
-LightSerializer: collection through .to_json:       19.5 i/s
-Blueprinter collection:       18.1 i/s - same-ish: difference falls within error
-Surrealist: collection through Surrealist.surrealize_collection():        9.7 i/s - 2.02x  slower
-Surrealist: collection through Surrealist::Serializer:        7.8 i/s - 2.49x  slower
-ActiveModel::Serializers::JSON collection:        6.5 i/s - 3.00x  slower
-AMS(without logging) : collection:        5.7 i/s - 3.41x  slower
+Light: collection through .to_json:       47.4 i/s
+Blueprinter collection:       40.8 i/s - 1.16x  slower
+Surrealist: collection through Surrealist.surrealize_collection():       23.7 i/s - 2.00x  slower
+Surrealist: collection through Surrealist::Serializer:       19.8 i/s - 2.39x  slower
+ActiveModel::Serializers::JSON collection:       18.9 i/s - 2.51x  slower
+AMS(without logging) : collection:       15.4 i/s - 3.08x  slower
 
 Warming up --------------------------------------
 AMS (associations): instance
-                       338.000  i/100ms
+                       777.000  i/100ms
 Surrealist (associations): instance through .surrealize
-                       907.000  i/100ms
+                       992.000  i/100ms
 Light (associations): instance through .to_json
-                         2.627k i/100ms
+                         2.938k i/100ms
 Surrealist (associations): instance through Surrealist::Serializer
-                       921.000  i/100ms
+                         1.008k i/100ms
 ActiveModel::Serializers::JSON (associations)
-                         1.024k i/100ms
+                         1.204k i/100ms
 Blueprinter (associations)
-                         2.029k i/100ms
+                         2.113k i/100ms
 Calculating -------------------------------------
 AMS (associations): instance
-                          3.371k (± 2.9%) i/s -     16.900k in   5.018308s
+                          7.721k (± 4.5%) i/s -     38.850k in   5.041613s
 Surrealist (associations): instance through .surrealize
-                          9.139k (± 2.9%) i/s -     46.257k in   5.065403s
+                          9.974k (± 2.5%) i/s -     50.592k in   5.075571s
 Light (associations): instance through .to_json
-                         26.902k (± 2.8%) i/s -    136.604k in   5.081821s
+                         30.021k (± 2.6%) i/s -    152.776k in   5.092383s
 Surrealist (associations): instance through Surrealist::Serializer
-                          9.286k (± 3.0%) i/s -     46.971k in   5.062770s
+                         10.165k (± 4.2%) i/s -     51.408k in   5.068469s
 ActiveModel::Serializers::JSON (associations)
-                         10.313k (± 2.4%) i/s -     52.224k in   5.066930s
+                         12.337k (± 3.1%) i/s -     62.608k in   5.079849s
 Blueprinter (associations)
-                         20.826k (± 3.4%) i/s -    105.508k in   5.071876s
+                         21.265k (± 3.6%) i/s -    107.763k in   5.074063s
 
 Comparison:
-Light (associations): instance through .to_json:    26902.2 i/s
-Blueprinter (associations):    20825.6 i/s - 1.29x  slower
-ActiveModel::Serializers::JSON (associations):    10312.9 i/s - 2.61x  slower
-Surrealist (associations): instance through Surrealist::Serializer:     9286.0 i/s - 2.90x  slower
-Surrealist (associations): instance through .surrealize:     9139.5 i/s - 2.94x  slower
-AMS (associations): instance:     3370.6 i/s - 7.98x  slower
+Light (associations): instance through .to_json:    30021.1 i/s
+Blueprinter (associations):    21265.1 i/s - 1.41x  slower
+ActiveModel::Serializers::JSON (associations):    12336.7 i/s - 2.43x  slower
+Surrealist (associations): instance through Surrealist::Serializer:    10165.2 i/s - 2.95x  slower
+Surrealist (associations): instance through .surrealize:     9974.0 i/s - 3.01x  slower
+AMS (associations): instance:     7720.7 i/s - 3.89x  slower
 
 Warming up --------------------------------------
 AMS (associations): collection
@@ -182,7 +182,7 @@ AMS (associations): collection
 Surrealist (associations): collection through Surrealist.surrealize_collection()
                          1.000  i/100ms
 Light (associations): collection through .to_json
-                         1.000  i/100ms
+                         2.000  i/100ms
 Surrealist (associations): collection through Surrealist::Serializer
                          1.000  i/100ms
 ActiveModel::Serializers::JSON (associations): collection
@@ -191,130 +191,130 @@ Blueprinter (associations): collection
                          1.000  i/100ms
 Calculating -------------------------------------
 AMS (associations): collection
-                          1.172  (± 0.0%) i/s -      6.000  in   5.138824s
+                          5.628  (± 0.0%) i/s -     29.000  in   5.158533s
 Surrealist (associations): collection through Surrealist.surrealize_collection()
-                          2.694  (± 0.0%) i/s -     14.000  in   5.203211s
+                          6.754  (± 0.0%) i/s -     34.000  in   5.036950s
 Light (associations): collection through .to_json
-                          8.001  (± 0.0%) i/s -     40.000  in   5.008966s
+                         20.123  (± 5.0%) i/s -    102.000  in   5.072459s
 Surrealist (associations): collection through Surrealist::Serializer
-                          2.635  (± 0.0%) i/s -     14.000  in   5.319793s
+                          6.769  (± 0.0%) i/s -     34.000  in   5.026144s
 ActiveModel::Serializers::JSON (associations): collection
-                          3.309  (± 0.0%) i/s -     17.000  in   5.144606s
+                          9.035  (± 0.0%) i/s -     46.000  in   5.097702s
 Blueprinter (associations): collection
-                          7.817  (± 0.0%) i/s -     40.000  in   5.128954s
+                         15.646  (± 6.4%) i/s -     79.000  in   5.058134s
 
 Comparison:
-Light (associations): collection through .to_json:        8.0 i/s
-Blueprinter (associations): collection:        7.8 i/s - 1.02x  slower
-ActiveModel::Serializers::JSON (associations): collection:        3.3 i/s - 2.42x  slower
-Surrealist (associations): collection through Surrealist.surrealize_collection():        2.7 i/s - 2.97x  slower
-Surrealist (associations): collection through Surrealist::Serializer:        2.6 i/s - 3.04x  slower
-AMS (associations): collection:        1.2 i/s - 6.83x  slower
+Light (associations): collection through .to_json:       20.1 i/s
+Blueprinter (associations): collection:       15.6 i/s - 1.29x  slower
+ActiveModel::Serializers::JSON (associations): collection:        9.0 i/s - 2.23x  slower
+Surrealist (associations): collection through Surrealist::Serializer:        6.8 i/s - 2.97x  slower
+Surrealist (associations): collection through Surrealist.surrealize_collection():        6.8 i/s - 2.98x  slower
+AMS (associations): collection:        5.6 i/s - 3.58x  slower
 
 
 ------- Enabling Oj.optimize_rails() & Blueprinter config.generator = Oj -------
 Warming up --------------------------------------
 AMS(without logging) (with Oj): instance
-                         4.286k i/100ms
+                         3.961k i/100ms
 Surrealist: instance through .surrealize
-                         4.466k i/100ms
-LightSerializer: instance through .to_json
-                         9.569k i/100ms
+                         5.992k i/100ms
+Light: instance through .to_json
+                        11.180k i/100ms
 Surrealist: instance through Surrealist::Serializer
-                         3.124k i/100ms
+                         4.169k i/100ms
 ActiveModel::Serializers::JSON(with Oj) instance
-                         4.035k i/100ms
-Blueprinter(with Oj)     6.773k i/100ms
+                         5.032k i/100ms
+Blueprinter(with Oj)     9.131k i/100ms
 Calculating -------------------------------------
 AMS(without logging) (with Oj): instance
-                         49.629k (± 4.8%) i/s -    248.588k in   5.020623s
+                         63.382k (±21.9%) i/s -    285.192k in   5.019819s
 Surrealist: instance through .surrealize
-                         45.766k (± 3.2%) i/s -    232.232k in   5.079519s
-LightSerializer: instance through .to_json
-                         99.043k (± 2.6%) i/s -    497.588k in   5.027351s
+                         63.466k (± 2.2%) i/s -    317.576k in   5.006354s
+Light: instance through .to_json
+                        117.576k (± 2.8%) i/s -    592.540k in   5.043598s
 Surrealist: instance through Surrealist::Serializer
-                         31.665k (± 3.4%) i/s -    159.324k in   5.037471s
+                         42.932k (± 2.6%) i/s -    216.788k in   5.053261s
 ActiveModel::Serializers::JSON(with Oj) instance
-                         45.115k (± 4.0%) i/s -    225.960k in   5.017009s
-Blueprinter(with Oj)     70.319k (± 2.5%) i/s -    352.196k in   5.011834s
+                         61.446k (±16.2%) i/s -    291.856k in   5.007754s
+Blueprinter(with Oj)     95.658k (± 3.2%) i/s -    483.943k in   5.064356s
 
 Comparison:
-LightSerializer: instance through .to_json:    99042.9 i/s
-Blueprinter(with Oj):    70319.0 i/s - 1.41x  slower
-AMS(without logging) (with Oj): instance:    49629.4 i/s - 2.00x  slower
-Surrealist: instance through .surrealize:    45766.5 i/s - 2.16x  slower
-ActiveModel::Serializers::JSON(with Oj) instance:    45114.9 i/s - 2.20x  slower
-Surrealist: instance through Surrealist::Serializer:    31665.1 i/s - 3.13x  slower
+Light: instance through .to_json:   117576.3 i/s
+Blueprinter(with Oj):    95657.7 i/s - 1.23x  slower
+Surrealist: instance through .surrealize:    63466.0 i/s - 1.85x  slower
+AMS(without logging) (with Oj): instance:    63382.5 i/s - 1.86x  slower
+ActiveModel::Serializers::JSON(with Oj) instance:    61445.7 i/s - 1.91x  slower
+Surrealist: instance through Surrealist::Serializer:    42931.6 i/s - 2.74x  slower
 
 Warming up --------------------------------------
 AMS(without logging) (with Oj): collection
-                         1.000  i/100ms
-Surrealist: collection through Surrealist.surrealize_collection()
-                         1.000  i/100ms
-LightSerializer: collection through .to_json
-                         1.000  i/100ms
-Surrealist: collection through Surrealist::Serializer
-                         1.000  i/100ms
-ActiveModel::Serializers::JSON(with Oj) collection
-                         1.000  i/100ms
-Blueprinter collection(with Oj)
                          2.000  i/100ms
+Surrealist: collection through Surrealist.surrealize_collection()
+                         2.000  i/100ms
+Light: collection through .to_json
+                         4.000  i/100ms
+Surrealist: collection through Surrealist::Serializer
+                         2.000  i/100ms
+ActiveModel::Serializers::JSON(with Oj) collection
+                         3.000  i/100ms
+Blueprinter collection(with Oj)
+                         4.000  i/100ms
 Calculating -------------------------------------
 AMS(without logging) (with Oj): collection
-                          9.921  (± 0.0%) i/s -     50.000  in   5.047071s
+                         26.913  (± 7.4%) i/s -    136.000  in   5.070998s
 Surrealist: collection through Surrealist.surrealize_collection()
-                          9.459  (± 0.0%) i/s -     48.000  in   5.080945s
-LightSerializer: collection through .to_json
-                         19.470  (± 5.1%) i/s -     98.000  in   5.046335s
+                         23.421  (± 4.3%) i/s -    118.000  in   5.041755s
+Light: collection through .to_json
+                         46.893  (± 2.1%) i/s -    236.000  in   5.036927s
 Surrealist: collection through Surrealist::Serializer
-                          7.720  (± 0.0%) i/s -     39.000  in   5.063697s
+                         20.394  (± 4.9%) i/s -    102.000  in   5.014391s
 ActiveModel::Serializers::JSON(with Oj) collection
-                         10.796  (± 9.3%) i/s -     54.000  in   5.024268s
+                         33.469  (± 9.0%) i/s -    168.000  in   5.073981s
 Blueprinter collection(with Oj)
-                         20.156  (± 5.0%) i/s -    102.000  in   5.064738s
+                         39.616  (± 5.0%) i/s -    200.000  in   5.062459s
 
 Comparison:
-Blueprinter collection(with Oj):       20.2 i/s
-LightSerializer: collection through .to_json:       19.5 i/s - same-ish: difference falls within error
-ActiveModel::Serializers::JSON(with Oj) collection:       10.8 i/s - 1.87x  slower
-AMS(without logging) (with Oj): collection:        9.9 i/s - 2.03x  slower
-Surrealist: collection through Surrealist.surrealize_collection():        9.5 i/s - 2.13x  slower
-Surrealist: collection through Surrealist::Serializer:        7.7 i/s - 2.61x  slower
+Light: collection through .to_json:       46.9 i/s
+Blueprinter collection(with Oj):       39.6 i/s - 1.18x  slower
+ActiveModel::Serializers::JSON(with Oj) collection:       33.5 i/s - 1.40x  slower
+AMS(without logging) (with Oj): collection:       26.9 i/s - 1.74x  slower
+Surrealist: collection through Surrealist.surrealize_collection():       23.4 i/s - 2.00x  slower
+Surrealist: collection through Surrealist::Serializer:       20.4 i/s - 2.30x  slower
 
 Warming up --------------------------------------
 AMS (associations): instance
-                       381.000  i/100ms
+                         1.426k i/100ms
 Surrealist (associations): instance through .surrealize
-                       677.000  i/100ms
+                         1.302k i/100ms
 Light (associations): instance through .to_json
-                         2.074k i/100ms
+                         3.712k i/100ms
 Surrealist (associations): instance through Surrealist::Serializer
-                       687.000  i/100ms
+                         1.336k i/100ms
 ActiveModel::Serializers::JSON (associations)
-                         1.390k i/100ms
+                         2.527k i/100ms
 Blueprinter (associations)
-                         1.851k i/100ms
+                         2.724k i/100ms
 Calculating -------------------------------------
 AMS (associations): instance
-                          3.743k (± 5.9%) i/s -     19.050k in   5.108122s
+                         14.576k (± 5.2%) i/s -     74.152k in   5.100266s
 Surrealist (associations): instance through .surrealize
-                          6.817k (± 2.8%) i/s -     34.527k in   5.068641s
+                         13.194k (± 2.2%) i/s -     66.402k in   5.035181s
 Light (associations): instance through .to_json
-                         21.131k (± 3.0%) i/s -    105.774k in   5.010100s
+                         37.819k (± 2.8%) i/s -    189.312k in   5.009783s
 Surrealist (associations): instance through Surrealist::Serializer
-                          6.874k (± 3.1%) i/s -     34.350k in   5.001779s
+                         13.483k (± 2.5%) i/s -     68.136k in   5.057002s
 ActiveModel::Serializers::JSON (associations)
-                         13.996k (± 3.2%) i/s -     70.890k in   5.069785s
+                         25.725k (±14.4%) i/s -    126.350k in   5.046765s
 Blueprinter (associations)
-                         19.964k (± 3.5%) i/s -     99.954k in   5.013021s
+                         27.516k (± 3.1%) i/s -    138.924k in   5.053667s
 
 Comparison:
-Light (associations): instance through .to_json:    21131.3 i/s
-Blueprinter (associations):    19964.2 i/s - same-ish: difference falls within error
-ActiveModel::Serializers::JSON (associations):    13996.4 i/s - 1.51x  slower
-Surrealist (associations): instance through Surrealist::Serializer:     6874.1 i/s - 3.07x  slower
-Surrealist (associations): instance through .surrealize:     6817.0 i/s - 3.10x  slower
-AMS (associations): instance:     3742.8 i/s - 5.65x  slower
+Light (associations): instance through .to_json:    37819.2 i/s
+Blueprinter (associations):    27516.2 i/s - 1.37x  slower
+ActiveModel::Serializers::JSON (associations):    25725.3 i/s - 1.47x  slower
+AMS (associations): instance:    14576.4 i/s - 2.59x  slower
+Surrealist (associations): instance through Surrealist::Serializer:    13482.7 i/s - 2.81x  slower
+Surrealist (associations): instance through .surrealize:    13193.9 i/s - 2.87x  slower
 
 Warming up --------------------------------------
 AMS (associations): collection
@@ -322,7 +322,7 @@ AMS (associations): collection
 Surrealist (associations): collection through Surrealist.surrealize_collection()
                          1.000  i/100ms
 Light (associations): collection through .to_json
-                         1.000  i/100ms
+                         2.000  i/100ms
 Surrealist (associations): collection through Surrealist::Serializer
                          1.000  i/100ms
 ActiveModel::Serializers::JSON (associations): collection
@@ -331,23 +331,23 @@ Blueprinter (associations): collection
                          1.000  i/100ms
 Calculating -------------------------------------
 AMS (associations): collection
-                          1.387  (± 0.0%) i/s -      7.000  in   5.077429s
+                          8.448  (± 0.0%) i/s -     43.000  in   5.100105s
 Surrealist (associations): collection through Surrealist.surrealize_collection()
-                          2.649  (± 0.0%) i/s -     14.000  in   5.291537s
+                          6.861  (± 0.0%) i/s -     35.000  in   5.103246s
 Light (associations): collection through .to_json
-                          7.857  (± 0.0%) i/s -     40.000  in   5.103876s
+                         20.077  (± 0.0%) i/s -    102.000  in   5.083469s
 Surrealist (associations): collection through Surrealist::Serializer
-                          2.602  (± 0.0%) i/s -     13.000  in   5.003615s
+                          6.814  (± 0.0%) i/s -     35.000  in   5.140489s
 ActiveModel::Serializers::JSON (associations): collection
-                          5.693  (± 0.0%) i/s -     29.000  in   5.104138s
+                         16.713  (± 6.0%) i/s -     84.000  in   5.033276s
 Blueprinter (associations): collection
-                          8.603  (± 0.0%) i/s -     43.000  in   5.011885s
+                         16.138  (± 6.2%) i/s -     81.000  in   5.025043s
 
 Comparison:
-Blueprinter (associations): collection:        8.6 i/s
-Light (associations): collection through .to_json:        7.9 i/s - 1.09x  slower
-ActiveModel::Serializers::JSON (associations): collection:        5.7 i/s - 1.51x  slower
-Surrealist (associations): collection through Surrealist.surrealize_collection():        2.6 i/s - 3.25x  slower
-Surrealist (associations): collection through Surrealist::Serializer:        2.6 i/s - 3.31x  slower
-AMS (associations): collection:        1.4 i/s - 6.20x  slower
+Light (associations): collection through .to_json:       20.1 i/s
+ActiveModel::Serializers::JSON (associations): collection:       16.7 i/s - 1.20x  slower
+Blueprinter (associations): collection:       16.1 i/s - 1.24x  slower
+AMS (associations): collection:        8.4 i/s - 2.38x  slower
+Surrealist (associations): collection through Surrealist.surrealize_collection():        6.9 i/s - 2.93x  slower
+Surrealist (associations): collection through Surrealist::Serializer:        6.8 i/s - 2.95x  slower
 ```
