@@ -23,7 +23,7 @@ module LightSerializer
       @meta = meta
     end
 
-    def to_json
+    def to_json(*_args)
       Oj.dump(to_hash, mode: :compat)
     end
 

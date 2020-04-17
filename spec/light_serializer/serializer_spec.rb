@@ -61,7 +61,7 @@ RSpec.describe LightSerializer::Serializer do
     end
 
     context 'when serializer have attribute but object does not have one' do
-      subject(:serialized_object)  { TinyWithUnknownAttributeSeriaizer.new(object) }
+      subject(:serialized_object) { TinyWithUnknownAttributeSeriaizer.new(object) }
 
       it 'raises an error' do
         expect { hash_result }.

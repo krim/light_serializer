@@ -2,7 +2,7 @@
 
 RSpec.shared_context 'with base and nested serializers' do
   class EmptySeriaizer < ::LightSerializer::Serializer
-    attributes()
+    attributes
   end
 
   class TinySeriaizer < ::LightSerializer::Serializer

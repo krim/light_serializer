@@ -4,8 +4,8 @@ require 'bundler/setup'
 require 'pry'
 require 'light_serializer'
 
-Dir["#{__dir__}/shared/contexts/*.rb"].each { |file| require file }
-Dir["#{__dir__}/shared/examples/*.rb"].each { |file| require file }
+Dir["#{__dir__}/shared/contexts/*.rb"].sort.each { |file| require file }
+Dir["#{__dir__}/shared/examples/*.rb"].sort.each { |file| require file }
 
 if ENV['WITH_COVERAGE']
   require 'simplecov'
