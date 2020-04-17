@@ -13,7 +13,7 @@ module LightSerializer
       @context = context
     end
 
-    def to_json
+    def to_json(*_args)
       Oj.dump(collection_with_root, mode: :compat)
     end
 
